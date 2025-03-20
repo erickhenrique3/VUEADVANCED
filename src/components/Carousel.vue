@@ -134,7 +134,7 @@ i {
   border-radius: 50%;
   width: 40px;
   height: 40px;
-  background-color: #6347c7;
+  background-color: #000000;
   color: #fff;
 }
 
@@ -157,7 +157,7 @@ i {
   }
 
   .active {
-    background-color: #6347c7;
+    background-color: #000000;
   }
 }
 </style>

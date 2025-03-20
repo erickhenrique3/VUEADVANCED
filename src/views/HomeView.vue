@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     
-    <Header :storeName="'Minha Loja'"  :logo="logoUrl('logo')" />
+    <Header :storeName="'Garoto de Programa'"  :logo="logoUrl('logo')" />
     <Carousel
       :navigation="true"
       :pagination="true"
