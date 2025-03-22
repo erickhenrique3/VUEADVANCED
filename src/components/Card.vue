@@ -13,29 +13,37 @@ const props = defineProps({
   <div class="card">
     <img :src="product.image" :alt="product.name" class="card-image" />
     <h3 class="card-title">{{ product.name }}</h3>
-    <p class="card-price">R$ {{ product.price.toFixed(2) }}</p>
+    <p class="card-price">R$ {{ product.price }}</p>
     <button @click="$emit('add-to-cart', product)" class="card-button">Adicionar ao Carrinho</button>
   </div>
 </template>
 
 <style scoped>
 .card {
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 16px;
+  width: 300px;
+  height: 100%;
+  background: rgb(255, 255, 255);
+  border-radius: 12px;
+  padding: 20px;
   text-align: center;
-  width: 200px;
-  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
-  color: red;
+  width: 220px;
+  /* box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1); */
+  transition: transform 0.2s ease-in-out;
+}
+.card:hover {
+  transform: scale(1.03);
+  cursor: pointer;
 }
 .card-image {
   width: 100%;
   height: auto;
-  border-radius: 8px;
+  border-radius: 12px;
 }
 .card-title {
   font-size: 18px;
   margin: 10px 0;
+  font-weight: bold;
+  color: #333;
 }
 .card-price {
   font-size: 16px;
@@ -43,14 +51,19 @@ const props = defineProps({
   font-weight: bold;
 }
 .card-button {
-  background-color: #007bff;
-  color: white;
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
   border: none;
   padding: 10px;
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
+  transition: background 0.3s;
+  width: 100%;
+  font-size: 14px;
+  font-weight: bold;
 }
 .card-button:hover {
-  background-color: #0056b3;
+  background-color: #000000;
+  color: white;
 }
 </style>
