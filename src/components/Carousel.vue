@@ -4,12 +4,12 @@
 
     <!-- Navegação -->
     <div v-if="navEnabled" class="navigate">
-      <div class="toggle-page left" :class="{ 'visible': showNav }">
+      <!-- <div class="toggle-page left" :class="{ 'visible': showNav }">
         <i @click="prevSlide" class="fas fa-chevron-left">⭠</i>
-      </div>
-      <div class="toggle-page right" :class="{ 'visible': showNav }">
+      </div> -->
+      <!-- <div class="toggle-page right" :class="{ 'visible': showNav }">
         <i @click="nextSlide" class="fas fa-chevron-right">⭢</i>
-      </div>
+      </div> -->
     </div>
 
     <!-- Paginação -->
