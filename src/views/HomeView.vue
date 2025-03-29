@@ -5,7 +5,7 @@
     <Carousel
       :navigation="true"
       :pagination="true"
-      :startAutoPlay="false"
+      :startAutoPlay="true"
       :timeout="5000"
       class="carousel"
       v-slot="{ currentSlide }"
@@ -16,6 +16,9 @@
         </div>
       </Slide>
     </Carousel>
+
+    <SubHeader />
+
     <div class="cards">
       <Card v-for="product in products" :key="product.id" :product="product"/>
 
@@ -28,15 +31,16 @@ import Carousel from "../components/Carousel.vue";
 import Slide from "../components/Slide.vue";
 import Header from "../components/Header.vue";
 import Card from "@/components/Card.vue";
+import SubHeader from "@/components/SubHeader.vue";
 
 export default {
   name: "Home",
-  components: { Header, Carousel, Slide, Card },
+  components: { Header, Carousel, Slide, Card, SubHeader },
   setup() {
     const carouselSlides = ["bg-1", "bg-2", "bg-3"];
 
     const products = [
-  { id: 1, name: "Smartphone XYZ", price: 1999.99, image: "https://m.media-amazon.com/images/I/416MG51rNgL._AC_SX679_.jpg" },
+  { id: 1, name: "Smartphone XYZiachbabcahsbchasbcahsbcashbc", price: 1999.99, image: "https://m.media-amazon.com/images/I/416MG51rNgL._AC_SX679_.jpg" },
   { id: 2, name: "Notebook Ultra", price: 3599.99, image: "https://m.media-amazon.com/images/I/416MG51rNgL._AC_SX679_.jpg" },
   { id: 3, name: "Fone de Ouvido Bluetooth", price: 299.99, image: "https://m.media-amazon.com/images/I/416MG51rNgL._AC_SX679_.jpg" },
   { id: 4, name: "Smartwatch Fit", price: 499.99, image: "https://m.media-amazon.com/images/I/416MG51rNgL._AC_SX679_.jpg" },
@@ -74,15 +78,13 @@ export default {
 
 <style lang="scss" scoped>
 .home {
-  /* Se necessário, ajuste o espaço acima do carrossel */
-  // padding-top: 100px; /* Ajuste conforme o tamanho do seu header */
+
 }
 
 .carousel {
   position: relative;
   height: 400px; /* Definindo uma altura fixa para o carrossel */
   width: 100%;
-  // overflow: hidden;
   margin-top: 0; /* Remover qualquer margem adicional, se necessário */
 
   .slide-info {

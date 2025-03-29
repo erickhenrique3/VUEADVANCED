@@ -14,7 +14,7 @@ const props = defineProps({
     <img :src="product.image" :alt="product.name" class="card-image" />
     <h3 class="card-title">{{ product.name }}</h3>
     <p class="card-price">R$ {{ product.price }}</p>
-    <button @click="$emit('add-to-cart', product)" class="card-button">Adicionar ao Carrinho</button>
+    <!-- <button @click="$emit('add-to-cart', product)" class="card-button">Adicionar ao Carrinho</button> -->
   </div>
 </template>
 
@@ -27,7 +27,6 @@ const props = defineProps({
   padding: 20px;
   text-align: center;
   width: 220px;
-  /* box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1); */
   transition: transform 0.2s ease-in-out;
 }
 .card:hover {
@@ -44,10 +43,20 @@ const props = defineProps({
   margin: 10px 0;
   font-weight: bold;
   color: #333;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+  max-width: 100%;
+  max-height: 60px; /* Ajuste conforme necessário */
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Limita a quantidade de linhas */
+  -webkit-box-orient: vertical;
 }
+
 .card-price {
   font-size: 16px;
-  color: #09f36b;
+  color:rgb(42 159 52);
   font-weight: bold;
 }
 .card-button {
