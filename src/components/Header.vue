@@ -62,6 +62,7 @@ export default {
     },
     profileClicked() {
       console.log("Perfil clicado");
+      this.$emit("profile-clicked");
       // Lógica para o perfil
     }
   }

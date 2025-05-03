@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     
-    <Header :storeName="'Minha loja'"  :logo="logoUrl('logo')" />
+    <Header :storeName="'Minha loja'"  :logo="logoUrl('logo')" @profile-clicked="goToLoguin" />
     <Carousel
       :navigation="true"
       :pagination="true"
@@ -16,7 +16,6 @@
         </div>
       </Slide>
     </Carousel>
-
     <SubHeader />
 
     <div class="cards">
@@ -32,6 +31,7 @@ import Slide from "../components/Slide.vue";
 import Header from "../components/Header.vue";
 import Card from "@/components/Card.vue";
 import SubHeader from "@/components/SubHeader.vue";
+import { useRouter } from "vue-router";
 
 export default {
   name: "Home",
@@ -61,7 +61,13 @@ export default {
   { id: 19, name: "Micro-ondas 30L", price: 899.99, image: "https://m.media-amazon.com/images/I/416MG51rNgL._AC_SX679_.jpg" },
   { id: 20, name: "Máquina de Lavar", price: 2599.99, image: "https://m.media-amazon.com/images/I/416MG51rNgL._AC_SX679_.jpg" },
   { id: 21, name: "Máquina de Lavar", price: 2599.99, image: "https://m.media-amazon.com/images/I/416MG51rNgL._AC_SX679_.jpg" }
-];
+    ];
+
+    const router = useRouter();
+
+    const goToLoguin = () => {
+      router.push("/loguin");
+    };
 
 
     const logoUrl = (logo) =>{
@@ -71,7 +77,7 @@ export default {
       return new URL(`../assets/${name}.jpg`, import.meta.url).href;
     };
 
-    return { carouselSlides, getImageUrl, logoUrl, products };
+    return { carouselSlides, getImageUrl, logoUrl, products, goToLoguin };
   },
 };
 </script>

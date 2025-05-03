@@ -31,7 +31,7 @@
   <style scoped>
   .subheader {
     text-align: center;
-    margin: 20px 0;
+    margin: 40px 0;
   }
   
   .title {
@@ -45,7 +45,6 @@
     justify-content: center;
     list-style: none;
     padding: 0;
-    border-bottom: 1px solid #ccc;
   }
   
   .nav li {
