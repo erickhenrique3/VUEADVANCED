@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     
-    <Header :storeName="'Minha loja'"  :logo="logoUrl('logo')" @profile-clicked="goToLoguin" />
+    <Header :storeName="'Minha loja'"  :logo="logoUrl('logo')" :user="user"   @profile-clicked="goToLoguin" />
     <Carousel
       :navigation="true"
       :pagination="true"
@@ -32,6 +32,7 @@ import Header from "../components/Header.vue";
 import Card from "@/components/Card.vue";
 import SubHeader from "@/components/SubHeader.vue";
 import { useRouter } from "vue-router";
+import { useUserStore } from "@/stores/userStore";
 
 export default {
   name: "Home",
@@ -64,6 +65,8 @@ export default {
     ];
 
     const router = useRouter();
+    const userStore = useUserStore(); // Acessando o store do usuário
+    const user = userStore.$state;
 
     const goToLoguin = () => {
       router.push("/loguin");
@@ -77,7 +80,7 @@ export default {
       return new URL(`../assets/${name}.jpg`, import.meta.url).href;
     };
 
-    return { carouselSlides, getImageUrl, logoUrl, products, goToLoguin };
+    return { carouselSlides, getImageUrl, logoUrl, products, goToLoguin, user };
   },
 };
 </script>

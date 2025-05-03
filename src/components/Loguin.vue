@@ -5,8 +5,9 @@
       <transition name="fade" mode="out-in">
         <div v-if="step === 'email'" key="email" class="form">
           <h2>Fazer login</h2>
-          <p>Insira seu e-mail para receber um código de login</p>
-          <input type="email" placeholder="E-mail" v-model="email" />
+          <p>Insira seu e-mail e nome para receber um código de login</p>
+					<input type="text" placeholder="Nome" v-model="userName" class="input-field" />
+          <input type="email" placeholder="E-mail" v-model="email"  class="input-field" />
           <button @click="goToCodeStep">Continuar</button>
           <a href="#" class="privacy">Privacidade</a>
         </div>
@@ -24,7 +25,7 @@
 								@input="(e) => handleInput(e, i)"
 						/>
           </div>
-          <button @click="redirectHome">Validar código</button>
+          <button @click="handleVerifyCode">Validar código</button>
         </div>
       </transition>
     </div>
@@ -32,19 +33,26 @@
 </template>
 
 <script setup>
+import { useUserStore } from '@/stores/userStore'
 import { nextTick, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
 
+const userStore = useUserStore()
+
 const step = ref('email') // 'email' ou 'code'
 const email = ref('')
+const userName = ref('')
 const codeInputs = Array.from({ length: 6 }, () => ref(null))
 
 function goToCodeStep() {
   if (email.value.trim() !== '') {
+    userStore.email = email.value
+		userStore.name = userName.value
     step.value = 'code'
-		nextTick(() => codeInputs[0].value?.focus())
+    handleSendCode() // Enviar o código após a validação do e-mail
+    nextTick(() => codeInputs[0].value?.focus()) // Focar no primeiro input de código
   }
 }
 
@@ -57,9 +65,22 @@ function handleInput(event, index) {
   }
 }
 
+const handleSendCode = async () => {
+  await userStore.sendEmail()
+}
+
+// Função para verificar o código
+const handleVerifyCode = async () => {
+  const code = codeInputs.map(input => input.value).join('')
+  userStore.code = code // Atualiza o código na store
+  await userStore.verifyCode() // Chama a ação para verificar o código
+  if (userStore.isVerified) {
+    redirectHome() // Redireciona para a página inicial
+  }
+}
 
 function redirectHome() {
-	router.push({ name: 'home' });
+  router.push({ name: 'home' })
 }
 </script>
 
@@ -99,6 +120,7 @@ function redirectHome() {
   margin-bottom: 1.5rem;
 }
 
+.input-field,
 input[type="email"],
 .code-inputs input {
   width: 100%;

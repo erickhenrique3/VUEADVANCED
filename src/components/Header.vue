@@ -25,12 +25,16 @@
         </i>
       </button>
       <button @click="profileClicked">
-        <i class="fas fa-user">
-          <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="#ffffff" viewBox="0 0 256 256">
-            <path d="M230.92,212c-15.23-26.33-38.7-45.21-66.09-54.16a72,72,0,1,0-73.66,0C63.78,166.78,40.31,185.66,25.08,212a8,8,0,1,0,13.85,8c18.84-32.56,52.14-52,89.07-52s70.23,19.44,89.07,52a8,8,0,1,0,13.85-8ZM72,96a56,56,0,1,1,56,56A56.06,56.06,0,0,1,72,96Z">
+        <img
+          v-if="user && user.isVerified"
+          :src="generateAvatar(user.name)"
+          alt=""
+          class="avatar-image"
+        />
+        <svg v-else xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="#ffffff" viewBox="0 0 256 256">
+          <path d="M230.92,212c-15.23-26.33-38.7-45.21-66.09-54.16a72,72,0,1,0-73.66,0C63.78,166.78,40.31,185.66,25.08,212a8,8,0,1,0,13.85,8c18.84-32.56,52.14-52,89.07-52s70.23,19.44,89.07,52a8,8,0,1,0,13.85-8ZM72,96a56,56,0,1,1,56,56A56.06,56.06,0,0,1,72,96Z">
           </path>
         </svg>
-        </i>
       </button>
     </div>
   </header>
@@ -49,22 +53,29 @@ export default {
       type: String,
       required: false,
       default: ""
+    },
+    user: {
+      type: Object,
+      required: false,
+      default: () => ({ avatar: null })
     }
   },
   methods: {
     searchClicked() {
       console.log("Pesquisa clicada");
-      // Lógica para pesquisa
     },
     cartClicked() {
       console.log("Carrinho clicado");
-      // Lógica para o carrinho
     },
     profileClicked() {
       console.log("Perfil clicado");
       this.$emit("profile-clicked");
-      // Lógica para o perfil
-    }
+    },
+    generateAvatar(name) {
+        if (!name) return '';  
+        const firstLetter = name.charAt(0).toUpperCase(); 
+        return `https://ui-avatars.com/api/?name=${firstLetter}&background=random&color=fff`;
+      }
   }
 };
 </script>
@@ -111,7 +122,16 @@ export default {
   color: #494949;
 }
 
-.actions i {
-  font-size: 20px;
+.avatar-image {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  object-fit: cover;
 }
+
+.actions svg {
+  width: 25px; 
+  height: 25px;
+}
+
 </style>
